@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project implements an analytical data engineering pipeline using Python, Docker, DBT (Data Build Tool), Google BigQuery, and Power BI. The pipeline processes user, session, and support ticket data from Baldur's Gate 3 to deliver insightful analytics and visualizations.
+This project implements an analytical data engineering pipeline using Python, PostgreSQL, DBT (Data Build Tool), Google BigQuery, and Power BI. The pipeline processes user, session, and support ticket data from Baldur's Gate 3 to deliver insightful analytics and visualizations.
 
 ## Objective
 
@@ -11,7 +11,7 @@ The pipeline aims to analyze user engagement, session behaviors, device usage, g
 ## Tech Stack
 
 - **Python**: Data extraction and ETL processes
-- **Docker**: Containerization for environment consistency
+- **PostgreSQL**: Primary relational database used for storing raw data
 - **DBT**: Data transformation and modeling
 - **Google BigQuery**: Data warehouse and storage
 - **PowerBI**: Data visualization and dashboarding
