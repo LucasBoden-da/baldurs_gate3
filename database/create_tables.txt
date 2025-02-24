@@ -1,0 +1,64 @@
+create schema bg3;
+
+CREATE TABLE bg3.Countries (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    continent VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE bg3.Referrals (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE bg3.Devices (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE bg3.Session_status (
+    id SERIAL PRIMARY KEY,
+    description VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE bg3.Ticket_status (
+    id SERIAL PRIMARY KEY,
+    description VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE bg3.Users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT now(),
+    country_id INT REFERENCES bg3.Countries(id) ON DELETE CASCADE,
+    referral_id INT REFERENCES bg3.Referrals(id) ON DELETE CASCADE
+);
+
+CREATE TABLE bg3.tickets_categories (
+    id SERIAL PRIMARY KEY,
+    name varchar(100) unique not null
+);
+
+CREATE TABLE bg3.Session (
+    id SERIAL PRIMARY KEY,
+    start_date TIMESTAMP NOT NULL,
+    end_date TIMESTAMP,
+    device_id INT REFERENCES bg3.Devices(id) ON DELETE CASCADE,
+    user_id INT REFERENCES bg3.Users(id) ON DELETE CASCADE,
+    country_access_id INT REFERENCES bg3.Countries(id) ON DELETE CASCADE,
+    session_status_id INT REFERENCES bg3.Session_status(id) ON DELETE CASCADE
+);
+
+CREATE TABLE bg3.Tickets (
+    id SERIAL PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT NOW(),
+    first_response_at TIMESTAMP,
+    resolved_at TIMESTAMP,
+    ticket_category_id INT REFERENCES bg3.tickets_categories (id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    user_id INT REFERENCES bg3.Users(id) ON DELETE CASCADE,
+    ticket_status_id INT REFERENCES bg3.Ticket_status(id) ON DELETE CASCADE
+);

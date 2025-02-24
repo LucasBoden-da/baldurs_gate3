@@ -1,0 +1,14 @@
+bg3:
+  outputs:
+    dev:
+      dataset: baldursgate3
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: ../google_key/YOUR_GC_KEY.json
+      location: US
+      method: service-account
+      priority: interactive
+      project: baldursgate3
+      threads: 1
+      type: bigquery
+  target: dev

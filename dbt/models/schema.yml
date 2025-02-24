@@ -1,0 +1,96 @@
+version: 2
+
+models:
+  - name: dim_devices
+    description: "Devices dimension with device names."
+    columns:
+      - name: device_id
+        description: "Device unique identifier."
+      - name: device_name
+        description: "Name or type of the device (PC, Xbox, PlayStation, Steam Deck)."
+
+  - name: dim_countries
+    description: "Countries dimension including country name and continent."
+    columns:
+      - name: country_id
+        description: "Country unique identifier."
+      - name: country
+        description: "Country's name (USA, Brazil, Canada,UK, Germany, Japan)."
+      - name: continent
+        description: "Continent where the country is located (America, South America, Europe,Asia)."
+
+  - name: dim_referrals
+    description: "Referrals dimension tracking sources through which users were acquired."
+    columns:
+      - name: referral_id
+        description: "Referral unique identifier."
+      - name: referral
+        description: "Description of the referral source (Google Ads, YouTube, Twitch, Friend Referral)."
+
+  - name: dim_tickets_categories
+    description: "Dimension categorizing support tickets by their type or issue."
+    columns:
+      - name: tickets_category_id
+        description: "Ticket category unique identifier."
+      - name: tickets_category
+        description: "Description of the ticket category (Bug, Payment Methods, Gameplay, Login Issue)."
+
+  - name: dim_tickets_status
+    description: "Dimension with possible statuses of tickets."
+    columns:
+      - name: ticket_status_id
+        description: "Ticket status unique identifier."
+      - name: tickets_status
+        description: "Description of ticket status (Open, In Progress, Resolved, Closed)."
+
+  - name: dim_users
+    description: "Users dimension with information related to individual users."
+    columns:
+      - name: user_id
+        description: "User unique identifier."
+      - name: referral_id
+        description: "Identifier of the referral source associated with the user."
+      - name: country_id
+        description: "Identifier of the country associated with the user."
+
+  - name: fact_sessions
+    description: "Fact table tracking user login sessions, duration, and device usage."
+    columns:
+      - name: session_id
+        description: "Session unique identifier."
+      - name: country_access_id
+        description: "Identifier of the country from where the session originated."
+      - name: user_id
+        description: "Identifier of the user who initiated the session."
+      - name: device_id
+        description: "Identifier of the device used for the session."
+      - name: start_date
+        description: "Date and timestamp when the session started."
+      - name: time_spent_seconds
+        description: "Total duration of the session in seconds."
+      - name: week
+        description: "Date representing the first day (Monday) of the week in which the session occurred."
+
+  - name: fact_tickets
+    description: "Fact table containing support tickets data, response times, and resolution metrics."
+    columns:
+      - name: ticket_id
+        description: "Ticket unique identifier."
+      - name: created_at
+        description: "Timestamp when the ticket was created."
+      - name: first_response_date
+        description: "Timestamp when the first response was provided to the ticket."
+      - name: solve_date
+        description: "Timestamp when the ticket was resolved."
+      - name: ticket_category_id
+        description: "Identifier for the category of the ticket."
+      - name: ticket_status_id
+        description: "Identifier for the status of the ticket."
+      - name: user_id
+        description: "Identifier of the user who created the ticket."
+      - name: time_first_response_seconds
+        description: "Time elapsed in seconds between ticket creation and the first response."
+      - name: time_resolution_seconds
+        description: "Time elapsed in seconds from ticket creation until it was resolved."
+      - name: time_from_first_response_to_resolve_seconds
+        description: "Time elapsed in seconds from the first response to ticket resolution."

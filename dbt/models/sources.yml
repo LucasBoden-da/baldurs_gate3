@@ -1,0 +1,92 @@
+# Projeto 7 - Pipeline de Engenharia Analítica com Python, Docker, DBT, BigQuery e Looker Studio
+
+version: 2
+
+sources:
+  - name: baldursgate3
+    database: "baldursgate3"
+    schema: "baldursgate3"
+    tables:
+      - name: stg_devices
+        description: "Devices table containing raw data about user devices."
+        columns:
+          - name: id_devices
+            description: "Device unique identifier."
+          - name: device_name
+            description: "Name or type of the device used by users."
+
+      - name: stg_countries
+        description: "Countries table containing raw geographical data."
+        columns:
+          - name: id_countries
+            description: "Country unique identifier."
+          - name: country
+            description: "Name of the country."
+          - name: continent
+            description: "Continent to which the country belongs."
+
+      - name: stg_sessions
+        description: "Sessions table with raw data about user login sessions."
+        columns:
+          - name: start_date
+            description: "Timestamp marking the beginning of a user's session."
+          - name: end_date
+            description: "Timestamp marking the end of a user's session."
+          - name: device_id
+            description: "Identifier of the device used during the session."
+          - name: user_id
+            description: "Identifier of the user who logged in."
+          - name: country_access_id
+            description: "Identifier of the country from which the session originated."
+
+      - name: stg_users
+        description: "Raw data of user profiles and related attributes."
+        columns:
+          - name: id
+            description: "User unique identifier."
+          - name: referral_id
+            description: "Identifier of the referral source that acquired the user."
+          - name: country_id
+            description: "Identifier of the country associated with the user."
+
+      - name: stg_referrals
+        description: "Raw data of referral sources through which users were acquired."
+        columns:
+          - name: id
+            description: "Referral source unique identifier."
+          - name: name
+            description: "Description of the referral source."
+
+      - name: stg_tickets_status
+        description: "Raw data table containing possible statuses of support tickets."
+        columns:
+          - name: id
+            description: "Ticket status unique identifier."
+          - name: description
+            description: "Description of the ticket status (e.g., Open, Closed)."
+
+      - name: stg_tickets_categories
+        description: "Raw data categorizing the types or issues of support tickets."
+        columns:
+          - name: id
+            description: "Ticket category unique identifier."
+          - name: name
+            description: "Description of the category type for support tickets."
+
+      - name: stg_tickets
+        description: "Raw support ticket data, including response and resolution details."
+        columns:
+          - name: id
+            description: "Ticket unique identifier."
+          - name: created_at
+            description: "Timestamp when the ticket was created."
+          - name: first_response_at
+            description: "Timestamp of the first response provided to the ticket."
+          - name: resolved_at
+            description: "Timestamp when the ticket was resolved."
+          - name: ticket_category_id
+            description: "Identifier for the category assigned to the ticket."
+          - name: user_id
+            description: "Identifier of the user who opened the ticket."
+          - name: ticket_status_id
+            description: "Identifier for the current status of the ticket."
